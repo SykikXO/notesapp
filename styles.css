@@ -1,0 +1,339 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex; 
+    height: 100vh;
+}
+
+.sidebar {
+    top: 0;
+    position: sticky;
+    width: 20%; 
+    max-width: 200px; /* Maximum width of sidebar */
+    background-color: rgb(226, 223, 223); /* Sidebar background color */
+    display: flex; /* Use Flexbox for layout */
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: flex-start; 
+    padding: 1%;
+    max-height: 100vh; /* Full height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 0.1s ease-out; /* Transition for width */
+}
+
+.sidebar header{
+    margin-bottom: 50px;
+}
+.main-content {
+    flex: 1; /* Main area takes up remaining space */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+header {
+    font-size: 36px;
+    justify-items: center;
+}
+
+.sidebar-content {
+    color: black;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.sidebar-button {
+    display: flex; /* Use flexbox for button layout */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Button takes full width of sidebar */
+    padding: 10px; /* Adds padding inside the button */
+    margin: 5% 0; /* Adds space between buttons */
+    background-color: white; 
+    color: black; 
+    border-width: 2px;
+    border-radius: 10px; 
+    border-style: dotted;
+    text-align: left;
+    cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
+
+.sidebar-button:last-child {
+    margin-top: auto;
+}
+
+.sidebar i {
+    margin-right: 15px;
+}
+
+.sidebar-content i {
+   font-size: 30px;
+}
+
+.sidebar-button:hover {
+   background-color: black; 
+   color: azure;
+}
+
+/* Collapsed state styles */
+.sidebar.collapsed {
+   width: 3em; /* Width of collapsed sidebar */
+}
+
+.sidebar.collapsed .sidebar-content {
+    margin-left: 10%;;
+    margin-top: 10px;
+    justify-content: center; /* Center icons when collapsed */
+    padding-left: 0; /* Remove left padding to avoid shifting */
+    padding-right: 0; /* Remove right padding to avoid shifting */
+    height: auto;
+}
+
+/* Center icons when collapsed, adjust padding accordingly */
+.sidebar.collapsed .sidebar-button {
+   justify-content: center; /* Center icons when collapsed */
+   margin-top: 15px;
+   padding-left: 0; /* Remove left padding to avoid shifting */
+   padding-right: 0; /* Remove right padding to avoid shifting */
+   height: auto; /* Allow height to adjust based on content */
+}
+.sidebar.collapsed .sidebar-button:last-child {
+    margin-top: auto;
+}
+.sidebar.collapsed .sidebar-button span,
+.sidebar.collapsed .sidebar-content span {
+   display: none; 
+}
+
+.sidebar.collapsed .sidebar-button i {
+   font-size: 20px; /* Set icon size in collapsed state */
+   margin-right: 0; /* Remove margin for better centering */
+}
+
+/* Increase icon size when collapsed without affecting layout */
+.sidebar.collapsed .sidebar-content i {
+   font-size: 42px; 
+}
+
+/* Note modal styles remain unchanged */
+.note-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    z-index: 1000;
+    transition: opacity ease 1s;
+    opacity: 1;
+}
+
+.modal-content {
+    display: block;
+    background-color: white; /* Modal background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    width: 90%; /* Responsive width */
+    max-width: 500px; /* Maximum width for larger screens */
+}
+
+textarea {
+    width: 95%; /* Full width of modal content */
+    height: 250px; /* Fixed height for textarea */
+    margin-bottom: 20px; /* Space between textarea and buttons */
+    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ccc; /* Border color */
+    padding: 10px; /* Padding inside textarea */
+    resize: none; /* Disable resizing the textarea */
+}
+.note-textarea {
+    border: 1px solid #ccc; /* Border around the editable area */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding inside */
+    min-height: 150px; /* Minimum height for the editable area */
+    margin-bottom: 10px; /* Space below the editable area */
+    overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+}
+
+.modal-buttons {
+    display: flex; /* Use flexbox for button layout */
+    justify-content: space-between;
+    align-items: center; /* Align buttons vertically in the center */
+    margin-top: 10px; /* Space above buttons */
+}
+
+.text-style-options {
+    display: flex; /* Use flexbox for text style buttons */
+    justify-content: space-between;
+    margin: 0 10px; /* Margin on left and right for spacing */
+}
+
+.text-style-options button {
+    padding: 15px; /* Padding inside text style buttons */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    margin: 0 10px;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.text-style-options button:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+}
+
+button {
+    padding: 10px 20px; /* Padding inside save and cancel buttons */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+#saveNote {
+    background-color: #4CAF50; /* Green background for save button */
+    color: white; /* White text color */
+}
+
+#cancelNote {
+    background-color: #f44336; /* Red background for cancel button */
+    color: white; /* White text color */
+}
+
+#saveNote:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+#cancelNote:hover {
+    background-color: #e53935; /* Darker red on hover */
+}
+
+/* Notes grid styles */
+
+.notes-grid {
+   display:grid;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive columns */
+   grid-auto-rows:200px; /* Default row height */
+   gap :16px; /* Space between grid items */
+   padding :20px;
+}
+
+.note-card {
+   background-color:#f9f9f9;
+   border-radius :5px;
+   padding :10px;
+   box-shadow :0 2px 5px rgba(0,0,0,0.1);
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+   font-size: larger;
+   overflow:hidden; /* Prevent overflow */
+}
+
+.note-card p {
+   margin :0; /* Remove default margin */
+
+   display:-webkit-box; /* For older browsers support */
+   display :box; /* For modern browsers support */
+   -webkit-box-orient :vertical; 
+   -webkit-line-clamp :5; /* Limit number of lines displayed */
+
+   overflow:hidden; 
+   text-overflow :ellipsis;
+
+   word-wrap :break-word; 
+}
+
+.note-card {
+    position: relative; /* To position buttons absolutely */
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+}
+
+.edit-button,
+.delete-button {
+    position: absolute; /* Position them relative to the note card */
+    bottom: 10px; /* Position from the bottom */
+    right: 10px; /* Position from the right */
+    width: 40px; /* Set width */
+    height: 40px; /* Set height */
+    border-radius: 100%; /* Make them circular */
+    border: none; /* Remove default border */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for visibility */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    cursor: pointer; /* Change cursor on hover */
+    display: none; /* Initially hide buttons */
+    font-size: small;
+
+    align-items: center;
+}
+
+.edit-button i,
+.delete-button i{
+    position:absolute ;
+    left: 30%;
+    top: 30%;
+}
+.edit-button {
+    margin-right: 40px; /* Space between edit and delete buttons */
+}
+
+.note-card:hover .edit-button,
+.note-card:hover .delete-button {
+    display: block; /* Show buttons on hover */
+}
+
+
+@media only screen and (max-width: 600px) {
+    .sidebar {
+        position: sticky;
+        overflow-x: hidden;
+        width: 3em; /* Set the width for the collapsed state */
+    }
+    .sidebar span {
+        opacity: 0; /* Hide text when collapsed */
+    }
+    .sidebar .sidebar-content {
+        margin-left: 10%;;
+        margin-top: 10px;
+        justify-content: center; /* Center icons when collapsed */
+        padding-left: 0; /* Remove left padding to avoid shifting */
+        padding-right: 0; /* Remove right padding to avoid shifting */
+        height: auto;
+    }
+    
+    /* Center icons when collapsed, adjust padding accordingly */
+    .sidebar .sidebar-button {
+       justify-content: center; /* Center icons when collapsed */
+       margin-top: 15px;
+       padding-left: 0; /* Remove left padding to avoid shifting */
+       padding-right: 0; /* Remove right padding to avoid shifting */
+       height: auto; /* Allow height to adjust based on content */
+    }
+    .sidebar .sidebar-button:last-child {
+        display: none;
+        margin-top: auto;
+    }
+    .sidebar .sidebar-button span,
+    .sidebar .sidebar-content span {
+       display: none; /* Hide text when collapsed */
+    
+    }
+    
+    .sidebar .sidebar-button i {
+       font-size: 20px; /* Set icon size in collapsed state */
+       margin-right: 0; /* Remove margin for better centering */
+    }
+    
+    /* Increase icon size when collapsed without affecting layout */
+    .sidebar .sidebar-content i {
+       font-size: 42px; 
+    }
+    
+}
